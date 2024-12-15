@@ -16,32 +16,47 @@ class Produto {
     }
 }
 class Cliente extends Pessoa {
-    constructor(nome, idade, produto) {
+    constructor(nome, idade) {
         super(nome, idade);
         this.nome = nome;
         this.idade = idade;
-        this.produto = produto;
-        this.produto = produto;
+        this.produtoDocliente = [];
     }
     dizerBomdia() {
-        console.log('bom dia');
+        console.log(`Ola bom dia, me chamo ${this.nome}`);
     }
-}
-class TipoDePagemento {
-    constructor(credito, dinheiro, debito) {
-        this.credito = credito;
-        this.dinheiro = dinheiro;
-        this.debito = debito;
-        this.credito = credito;
-        this.debito = debito;
-        this.dinheiro = dinheiro;
+    adcionarProduto(produto) {
+        this.produtoDocliente.push(...produto);
+    }
+    listarProdutosDoCliente() {
+        return this.produtoDocliente;
     }
 }
 class Loja {
-    constructor(cliente, tipoPagamento) {
-        this.cliente = cliente;
-        this.tipoPagamento = tipoPagamento;
-        this.cliente = cliente;
-        this.tipoPagamento = tipoPagamento;
+    constructor(nome, endereco) {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.clentesDaLoja = [];
+        this.produtosDaLoja = [];
+        this.nome = nome;
+        this.endereco = endereco;
+    }
+    novoCliente(cliente) {
+        this.clentesDaLoja.push(...cliente);
+    }
+    novoProduto(produto) {
+        this.produtosDaLoja.push(...produto);
+    }
+    listarProdutos() {
+        return this.produtosDaLoja.map(p => p.nome);
     }
 }
+const joao = new Cliente('Joso', 32);
+joao.adcionarProduto([{ nome: 'pao', preco: 14 }, { nome: 'cerveja', preco: 21 }]);
+const produtosDoJoao = joao.listarProdutosDoCliente();
+console.log(joao);
+console.log(produtosDoJoao);
+const bemAqui = new Loja('mercado bem aqui', 'rua da lama');
+const noovoCliente = bemAqui.novoCliente([joao]);
+const novoProduto = bemAqui.novoProduto(produtosDoJoao);
+console.log(bemAqui);
